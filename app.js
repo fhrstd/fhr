@@ -10,47 +10,30 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Register custom A-Frame component
 AFRAME.registerComponent('gif-handler', {
-        init: function() {
-          this.el.addEventListener('targetFound', async () => {
+    init: function() {
+        this.el.addEventListener('targetFound', async () => {
             try {
-              const targetId = this.el.getAttribute('mindar-image-target').targetIndex;
-              
-              const { data, error } = await supabase
-                .from('animations')  // Your table name here
-                .select('gif_url')
-                .eq('target_id', targetId)
-                .single();
+                const targetId = this.el.getAttribute('mindar-image-target').targetIndex;
+                
+                const { data, error } = await supabase
+                    .from('animations')
+                    .select('gif_url')
+                    .eq('target_id', targetId)
+                    .single();
 
-              if (error) throw error;
+                if (error) throw error;
 
-              if (data) {
-                // Create HTML element for GIF
-                const gifEl = document.createElement('img');
-                gifEl.src = data.gif_url;
-                gifEl.style.display = 'none';
-                document.body.appendChild(gifEl);
-
-                // Get the plane element and update its material
-                const planeEl = this.el.querySelector('a-plane');
-                planeEl.setAttribute('material', {
-                  src: gifEl,
-                  transparent: true,
-                  alphaTest: 0.5
-                });
-              }
+                if (data) {
+                    const planeEl = this.el.querySelector('a-plane');
+                    planeEl.setAttribute('material', {
+                        shader: 'gif',
+                        src: data.gif_url,
+                        transparent: true
+                    });
+                }
             } catch (error) {
-              console.error('Error fetching GIF:', error);
+                console.error('Error:', error);
             }
-          });
-
-          this.el.addEventListener('targetLost', () => {
-            // Optional: Handle what happens when target is lost
-            const planeEl = this.el.querySelector('a-plane');
-            planeEl.setAttribute('material', {
-              src: '',
-              transparent: true,
-              alphaTest: 0.5
-            });
-          });
-        }
-      });
+        });
+    }
+});
