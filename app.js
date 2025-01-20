@@ -11,8 +11,15 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey)
 // Register custom A-Frame component
 AFRAME.registerComponent('gif-handler', {
     init: function() {
+          // Hide loading indicator initially
+        document.querySelector('#loading').classList.add('hidden');
+        
         this.el.addEventListener('targetFound', async () => {
             try {
+                // Show loading indicator
+                document.querySelector('#loading').classList.remove('hidden');
+                document.querySelector('#error').classList.add('hidden');
+                
                 const targetId = this.el.getAttribute('mindar-image-target').targetIndex;
                 
                 const { data, error } = await supabase
@@ -33,7 +40,16 @@ AFRAME.registerComponent('gif-handler', {
                 }
             } catch (error) {
                 console.error('Error:', error);
+                document.querySelector('#error').classList.remove('hidden');
+            } finally {
+                document.querySelector('#loading').classList.add('hidden');
             }
+        });
+
+        this.el.addEventListener('targetLost', () => {
+            // Optional: Handle what happens when target is lost
+            document.querySelector('#error').classList.add('hidden');
+
         });
     }
 });
