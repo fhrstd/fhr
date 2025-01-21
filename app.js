@@ -42,9 +42,9 @@ AFRAME.registerComponent('gif-handler', {
                     img.onload = () => {
                         planeEl.setAttribute('material', {
                             shader: 'gif',
-                            src: data.gif_url
+                            src: data.gif_url,
                             //transparent: true,
-                            //opacity: 1
+                            opacity: 1
                         });
                         if (loadingEl) loadingEl.classList.add('hidden');
                     };
@@ -63,9 +63,9 @@ AFRAME.registerComponent('gif-handler', {
             const planeEl = this.el.querySelector('a-plane');
             planeEl.setAttribute('material', {
                 shader: 'gif',
-                src: ''
+                src: '',
                 //transparent: true,
-                //opacity: 0
+                opacity: 0
             });
         });
     }
