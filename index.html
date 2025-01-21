@@ -4,8 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MindAR GIF Animation</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <!-- Use HTML video element for GIF display instead of shader -->
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <!--script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    < Use HTML video element for GIF display instead of shader -->
     <style>
       #loading {
         position: fixed;
@@ -45,14 +46,11 @@
       AFRAME.registerComponent('gif-handler', {
         init: function() {
           console.log('GIF handler initialized'); // Debug log
-           // Hide loading indicator initially
-          if (loadingEl) loadingEl.classList.add('hidden');
-          
+
           this.el.addEventListener('targetFound', async () => {
             console.log('Target found!'); // Debug log
             try {
-              if (loadingEl) loadingEl.classList.remove('hidden');
-              if (errorEl) errorEl.classList.add('hidden');
+
               const targetId = this.el.getAttribute('mindar-image-target').targetIndex;
               console.log('Target ID:', targetId); // Debug log
 
@@ -78,9 +76,10 @@
                   console.log('GIF loaded successfully'); // Debug log
                   const planeEl = this.el.querySelector('a-plane');
                   planeEl.setAttribute('material', {
+                    shader:gif,
                     src: gifEl,
-                    transparent: true,
-                    alphaTest: 0.5
+                    //transparent: true,
+                    //alphaTest: 0.5
                   });
                   console.log('Material updated'); // Debug log
                 };
@@ -105,7 +104,7 @@
     </script>
   </head>
   <body>
-    <div id="loading">Loading...</div>
+    <!--div id="loading">Loading...</div-->
     <div id="error" style="display: none;">Error loading animation</div>
     
     <a-scene mindar-image="imageTargetSrc: ./targets.mind;" 
