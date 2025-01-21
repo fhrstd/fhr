@@ -42,7 +42,7 @@ AFRAME.registerComponent('gif-handler', {
                     img.onload = () => {
                         entityEl.setAttribute('material', {
                             shader: 'gif',
-                            src: data.gif_url,
+                            src: 'url('data.gif_url')',
                             opacity: 1
                         });
                         if (loadingEl) loadingEl.classList.add('hidden');
@@ -62,7 +62,7 @@ AFRAME.registerComponent('gif-handler', {
             const entityEl = this.el.querySelector('a-entity');
             entityEl.setAttribute('material', {
                 shader: 'gif',
-                src: '',
+                src: 'url('data.gif_url')',
                 opacity: 0
             });
         });
