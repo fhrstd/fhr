@@ -78,8 +78,8 @@
                   planeEl.setAttribute('material', {
                     shader:gif,
                     src: gifEl,
-                    //transparent: true,
-                    //alphaTest: 0.5
+                    transparent: true,
+                    alphaTest: 0.5
                   });
                   console.log('Material updated'); // Debug log
                 };
@@ -104,7 +104,7 @@
     </script>
   </head>
   <body>
-    <!--div id="loading">Loading...</div-->
+    <div id="loading">Loading...</div>
     <div id="error" style="display: none;">Error loading animation</div>
     
     <a-scene mindar-image="imageTargetSrc: ./targets.mind;" 
