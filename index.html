@@ -45,10 +45,14 @@
       AFRAME.registerComponent('gif-handler', {
         init: function() {
           console.log('GIF handler initialized'); // Debug log
+           // Hide loading indicator initially
+          if (loadingEl) loadingEl.classList.add('hidden');
           
           this.el.addEventListener('targetFound', async () => {
             console.log('Target found!'); // Debug log
             try {
+              if (loadingEl) loadingEl.classList.remove('hidden');
+              if (errorEl) errorEl.classList.add('hidden');
               const targetId = this.el.getAttribute('mindar-image-target').targetIndex;
               console.log('Target ID:', targetId); // Debug log
 
