@@ -1,16 +1,12 @@
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
-  </head>
-  <body>
-    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0" >
-        <a-plane  position="0 2 -4" rotation="0 25 0" material="shader:gif;src:url(https://fdphjxbjnononpxljrgb.supabase.co/storage/v1/object/public/animations/Illustration%20Mic%20Drop%20GIF%20by%20WeTransfer.gif?t=2025-01-21T10%3A32%3A29.055Z)"></a-plane>
-      </a-entity>
-    </a-scene>
-  </body>
-</html>
+<title>My A-Frame Scene</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+</head>
+
+<body>
+  <a-scene>
+    <a-entity>
+      <a-plane  position="0 2 -4" rotation="0 25 0" material="shader:gif;src:url(https://fdphjxbjnononpxljrgb.supabase.co/storage/v1/object/public/animations/Illustration%20Mic%20Drop%20GIF%20by%20WeTransfer.gif?t=2025-01-21T10%3A32%3A29.055Z)"></a-plane>
+    </a-entity>
+  </a-scene>
+</body> 
