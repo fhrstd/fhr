@@ -44,7 +44,7 @@ AFRAME.registerComponent('gif-handler', {
                             shader: 'gif',
                             src: data.gif_url,
                             transparent: true,
-                            opacity: 1
+                            //opacity: 1
                         });
                         if (loadingEl) loadingEl.classList.add('hidden');
                     };
