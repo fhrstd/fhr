@@ -8,11 +8,11 @@
   <body>
       <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
-        <a-asset-item id="work" material="shader:gif;src:url(https://fdphjxbjnononpxljrgb.supabase.co/storage/v1/object/public/animations/Illustration%20Mic%20Drop%20GIF%20by%20WeTransfer.gif)"></a-asset-item>
+        <a-asset-item id="work" src="https://fdphjxbjnononpxljrgb.supabase.co/storage/v1/object/public/animations/Illustration%20Mic%20Drop%20GIF%20by%20WeTransfer.gif"></a-asset-item>
       </a-assets>
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane opacity="1" position="0 0 0" height="1" width="1" rotation="0 0 0" src="#work"></a-plane>
+        <a-plane material="shader:gif" opacity="1" position="0 0 0" height="1" width="1" rotation="0 0 0" src="#work"></a-plane>
       </a-entity>
     </a-scene>
   </body>
