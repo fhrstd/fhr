@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MindAR GIF Animation</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <!-- Use HTML video element for GIF display instead of shader -->
+    <style>
+      #loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      #error {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        background: rgba(255, 0, 0, 0.8);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+    </style>
+    <script type="module">
+      // Initialize Supabase
+      import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+      const supabaseUrl = 'https://fdphjxbjnononpxljrgb.supabase.co'
+      const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZkcGhqeGJqbm9ub25weGxqcmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzcxOTM1MzMsImV4cCI6MjA1Mjc2OTUzM30.4OAWrb2IOvq0lOOPplBzG-hGYrK5BfP-y9sCR4ac3Vc'
+      const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+      AFRAME.registerComponent('gif-handler', {
+        init: function() {
+          console.log('GIF handler initialized'); // Debug log
+          
+          this.el.addEventListener('targetFound', async () => {
+            console.log('Target found!'); // Debug log
+            try {
+              const targetId = this.el.getAttribute('mindar-image-target').targetIndex;
+              console.log('Target ID:', targetId); // Debug log
+
+              const { data, error } = await supabase
+                .from('animations')
+                .select('gif_url')
+                .eq('target_id', targetId)
+                .single();
+
+              if (error) {
+                console.error('Supabase error:', error);
+                return;
+              }
+
+              if (data) {
+                console.log('Retrieved GIF URL:', data.gif_url); // Debug log
+
+                // Create an img element for the GIF
+                const gifEl = document.createElement('img');
+                gifEl.style.display = 'none';
+                gifEl.crossOrigin = 'anonymous'; // Important for CORS
+                gifEl.onload = () => {
+                  console.log('GIF loaded successfully'); // Debug log
+                  const planeEl = this.el.querySelector('a-plane');
+                  planeEl.setAttribute('material', {
+                    src: gifEl,
+                    transparent: true,
+                    alphaTest: 0.5
+                  });
+                  console.log('Material updated'); // Debug log
+                };
+                
+                gifEl.onerror = (err) => {
+                  console.error('Error loading GIF:', err); // Debug log
+                };
+
+                document.body.appendChild(gifEl);
+                gifEl.src = data.gif_url;
+              }
+            } catch (error) {
+              console.error('Error in target found handler:', error);
+            }
+          });
+
+          this.el.addEventListener('targetLost', () => {
+            console.log('Target lost!'); // Debug log
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="loading">Loading...</div>
+    <div id="error" style="display: none;">Error loading animation</div>
+    
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0" gif-handler>
+        <a-plane color="white" opacity="1" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
