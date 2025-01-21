@@ -35,12 +35,12 @@ AFRAME.registerComponent('gif-handler', {
 
                 if (data) {
                     console.log('GIF URL:', data.gif_url); // Debug log
-                    const planeEl = this.el.querySelector('a-entity');
+                    const entityEl = this.el.querySelector('a-entity');
                     
                     // Preload the GIF
                     const img = new Image();
                     img.onload = () => {
-                        planeEl.setAttribute('material', {
+                        entityEl.setAttribute('material', {
                             shader: 'gif',
                             src: data.gif_url,
                             //transparent: true,
@@ -60,8 +60,8 @@ AFRAME.registerComponent('gif-handler', {
 
         this.el.addEventListener('targetLost', () => {
             if (errorEl) errorEl.classList.add('hidden');
-            const planeEl = this.el.querySelector('a-entity');
-            planeEl.setAttribute('material', {
+            const entityEl = this.el.querySelector('a-entity');
+            entityEl.setAttribute('material', {
                 shader: 'gif',
                 src: '',
                 //transparent: true,
