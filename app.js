@@ -4,36 +4,39 @@ const supabaseUrl = 'https://fdphjxbjnononpxljrgb.supabase.co'
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZkcGhqeGJqbm9ub25weGxqcmdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzcxOTM1MzMsImV4cCI6MjA1Mjc2OTUzM30.4OAWrb2IOvq0lOOPplBzG-hGYrK5BfP-y9sCR4ac3Vc'
 const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-// Function to fetch animations and create assets
-async function loadAnimationAssets() {
-    try {
-        // Fetch animations from Supabase
-        const { data: animations, error } = await supabase
-            .from('animations')
-            .select('target_id, gif_url, name')
+// Use an async function to retrieve data
+async function fetchAnimations() {
+  // Fetch data from the Supabase table 'animations'
+  const { data: animations, error } = await supabase
+    .from('animations')
+    .select('target_id, gif_url, name');
 
-        if (error) throw error
+  // Check for errors
+  if (error) {
+    console.error("Error fetching data:", error);
+    return;
+  }
 
-        // Get the a-assets element
-        const assets = document.querySelector('a-assets')
+  // Find the container element where assets will be appended
+  const assetsContainer = document.getElementById('assets-container');
 
-        // Generate img tags for each animation
-        animations.forEach(animation => {
-            const img = document.createElement('img')
-            img.id = animation.target_id
-            img.src = animation.gif_url
-            img.setAttribute('crossorigin', 'anonymous')
-            // You can also store the name as a data attribute if needed
-            img.dataset.name = animation.name
-            assets.appendChild(img)
-        })
+  // Loop through the fetched animations data and generate <a-assets> tags
+  animations.forEach(item => {
+    const aAssetsTag = document.createElement('a-assets');
+    const imgTag = document.createElement('img');
+    
+    // Set attributes for the <img> tag
+    imgTag.setAttribute('name', item.name);    // Use 'name' for the name
+    imgTag.setAttribute('src', item.gif_url); // Use 'gif_url' for the source
 
-        // Optional: Log when all assets are loaded
-        assets.addEventListener('loaded', () => {
-            console.log('All animation assets loaded')
-        })
+    // Append the <img> tag to the <a-assets> tag
+    aAssetsTag.appendChild(imgTag);
 
-    } catch (error) {
-        console.error('Error loading animations:', error)
-    }
+    // Append the <a-assets> tag to the container
+    assetsContainer.appendChild(aAssetsTag);
+  });
 }
+
+// Call the fetchAnimations function to load the assets dynamically
+fetchAnimations();
+
