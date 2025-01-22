@@ -31,6 +31,9 @@ async function fetchAnimations() {
   });
   // Log the final HTML structure of <a-assets> to the console
   console.log(assetsContainer.innerHTML);
+  // Trigger a re-scan of the assets by dispatching an event
+  const assetsLoadedEvent = new Event('assets-loaded');
+  assetsContainer.dispatchEvent(assetsLoadedEvent);
 }
 
 // Call the function to load the data and update the DOM
