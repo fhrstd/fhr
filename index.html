@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <title>fhrSTD-AR</title>
 <head>  
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,7 +8,8 @@
   <script type="module" src="app.js"></script>
 </head>
 <body>
-    <a-scene>
+    <!-- inisialisasi file .mind -->
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         <!-- Assets container -->
         <a-assets>
             <!-- Assets will be generated here -->
