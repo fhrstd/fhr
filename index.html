@@ -17,7 +17,7 @@
          
 <a-assets id="assets-container2">
             <!-- Assets will be generated here -->
- <img id="bg" src="https://fdphjxbjnononpxljrgb.supabase.co/storage/v1/object/public/animations/charity-bg.png?t=2025-01-22T22%3A14%3A41.688Z">
+ <img id="bg" src="https://fdphjxbjnononpxljrgb.supabase.co/storage/v1/object/public/animations/charity-bg.png">
         </a-assets>
       
         <!-- Your A-Frame entities go here -->
@@ -26,8 +26,7 @@
       <!-- repetisi menampilkan gif -->
        <a-entity mindar-image-target="targetIndex: 0">
         <a-entity id="box1" geometry="primitive:plane;width:1.2;height:1.2;" position="0 0 0.3" rotation="0 0 0"></a-entity>
-        <a-plane src="#bg" position="0 0 0" height="1.2" width="1" rotation="0 0 0"></a-plane>
-      </a-entity>
+       <a-entity src="#bg" geometry="primitive:plane;width:1;height:1.2;" position="0 0 0" rotation="0 0 0"></a-entity>
     </a-scene>
 </body>
 </html>
