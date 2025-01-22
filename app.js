@@ -6,36 +6,36 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Use an async function to retrieve data
 async function fetchAnimations() {
-  // Fetch data from the Supabase table 'animations'
+  // Fetch data from the Supabase database
   const { data: animations, error } = await supabase
     .from('animations')
     .select('target_id, gif_url, name');
 
-  // Check for errors
+  // Check if there was an error fetching the data
   if (error) {
     console.error("Error fetching data:", error);
     return;
   }
 
-  // Find the container element where assets will be appended
-  const assetsContainer = document.getElementById('img-container');
+  // Find the container where we will add the <a-assets> element
+  const assetsContainer = document.getElementById('assets-container');
 
-  // Loop through the fetched animations data and generate <a-assets> tags
+  // Create a single <a-assets> tag
+  const aAssetsTag = document.createElement('a-assets');
+
+  // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
   animations.forEach(item => {
     const imgTag = document.createElement('img');
-    
-    // Set attributes for the <img> tag
-    imgTag.setAttribute('name', item.name);    // Use 'name' for the name
-    imgTag.setAttribute('src', item.gif_url); // Use 'gif_url' for the source
+    imgTag.setAttribute('id', item.name);   // Set 'id' to the animation's name
+    imgTag.setAttribute('src', item.gif_url);  // Set 'src' to the gif_url
 
-    // Append the <img> tag to the <a-assets> tag
-    //aAssetsTag.appendChild(imgTag);
-
-    // Append the <img> tag to the container
-    assetsContainer.appendChild(imgTag);
+    // Append each <img> tag to the <a-assets> tag
+    aAssetsTag.appendChild(imgTag);
   });
+
+  // Append the <a-assets> tag to the container
+  assetsContainer.appendChild(aAssetsTag);
 }
 
-// Call the fetchAnimations function to load the assets dynamically
+// Call the function to load the data and update the DOM
 fetchAnimations();
-
