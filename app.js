@@ -17,11 +17,8 @@ async function fetchAnimations() {
     return;
   }
 
-  // Find the container where we will add the <a-assets> element
-  const assetsContainer = document.getElementById('assets-container');
-
-  // Create a single <a-assets> tag
-  const aAssetsTag = document.createElement('a-assets');
+  // Find the <a-assets> container inside the <a-scene>
+  const assetsContainer = document.querySelector('#assets-container');
 
   // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
   animations.forEach(item => {
@@ -30,11 +27,8 @@ async function fetchAnimations() {
     imgTag.setAttribute('src', item.gif_url);  // Set 'src' to the gif_url
 
     // Append each <img> tag to the <a-assets> tag
-    aAssetsTag.appendChild(imgTag);
+    assetsContainer.appendChild(imgTag);
   });
-
-  // Append the <a-assets> tag to the container
-  assetsContainer.appendChild(aAssetsTag);
 }
 
 // Call the function to load the data and update the DOM
