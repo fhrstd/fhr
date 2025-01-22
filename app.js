@@ -29,6 +29,8 @@ async function fetchAnimations() {
     // Append each <img> tag to the <a-assets> tag
     assetsContainer.appendChild(imgTag);
   });
+  // Log the final HTML structure of <a-assets> to the console
+  console.log(assetsContainer.innerHTML);
 }
 
 // Call the function to load the data and update the DOM
