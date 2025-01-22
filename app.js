@@ -10,6 +10,7 @@ async function fetchAnimations() {
   const { data: animations, error } = await supabase
     .from('animations')
     .select('target_id, gif_url, name');
+  
   const { data: background, error } = await supabase
     .from('background')
     .select('target_id, gif_url, name');
@@ -32,8 +33,8 @@ async function fetchAnimations() {
     // Append each <img> tag to the <a-assets> tag
     assetsContainer.appendChild(imgTag);
   // Now dynamically set the material of the box using the loaded asset
-      const gif = document.querySelector('#gif1');
-      gif.setAttribute('material', `shader:gif;src: #${item.name}`);
+      const box = document.querySelector('#box1');
+      box.setAttribute('material', `shader:gif;src: #${item.name}`);
   });
   
   //background.forEach(item => {
