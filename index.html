@@ -23,18 +23,5 @@
         <a-entity geometry="primitive:plane;width:1;height:1;" position="0 0 0" rotation="0 0 0" material="shader:gif;src:#work;"></a-entity>
       </a-entity>
     </a-scene>
-
-    <script>
-        // Initialize Supabase and load assets when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Supabase client
-            const supabaseUrl = 'YOUR_SUPABASE_URL'
-            const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'
-            const supabase = supabase.createClient(supabaseUrl, supabaseKey)
-
-            // Load the assets
-            loadAnimationAssets()
-        })
-    </script>
 </body>
 </html>
