@@ -18,11 +18,10 @@ async function fetchAnimations() {
   }
 
   // Find the container element where assets will be appended
-  const assetsContainer = document.getElementById('assets-container');
+  const assetsContainer = document.getElementById('img-container');
 
   // Loop through the fetched animations data and generate <a-assets> tags
   animations.forEach(item => {
-    const aAssetsTag = document.createElement('a-assets');
     const imgTag = document.createElement('img');
     
     // Set attributes for the <img> tag
