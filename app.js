@@ -28,12 +28,12 @@ async function fetchAnimations() {
 
     // Append each <img> tag to the <a-assets> tag
     assetsContainer.appendChild(imgTag);
+  // Now dynamically set the material of the box using the loaded asset
+      const box = document.querySelector('#box1');
+      box.setAttribute('material', `shader:gif;src: #${item.name}`);
   });
   // Log the final HTML structure of <a-assets> to the console
   console.log(assetsContainer.innerHTML);
-  // Trigger a re-scan of the assets by dispatching an event
-  const assetsLoadedEvent = new Event('assets-loaded');
-  assetsContainer.dispatchEvent(assetsLoadedEvent);
 }
 
 // Call the function to load the data and update the DOM
