@@ -65,7 +65,7 @@ async function fetchBackground() {
     assetsContainer.appendChild(imgTag);
   // Now dynamically set the material of the box using the loaded asset
       const bok = document.querySelector('#bok1');
-      bok.setAttribute('material', `src: #${item.name}`);
+      bok.setAttribute('src', `#${item.name}`);
   });
   // Log the final HTML structure of <a-assets> to the console
   console.log(assetsContainer.innerHTML);
