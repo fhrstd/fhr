@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<title>fhrSTD-AR</title>
+<head>  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- inisialisasi library -->
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+    <a-scene>
+        <!-- Assets container -->
+        <a-assets>
+            <!-- Assets will be generated here -->
+        </a-assets>
+
+        <!-- Your A-Frame entities go here -->
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      
+      <!-- repetisi menampilkan gif -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity geometry="primitive:plane;width:1;height:1;" position="0 0 0" rotation="0 0 0" material="shader:gif;src:#work;"></a-entity>
+      </a-entity>
+    </a-scene>
+
+    <script>
+        // Initialize Supabase and load assets when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Supabase client
+            const supabaseUrl = 'YOUR_SUPABASE_URL'
+            const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'
+            const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+
+            // Load the assets
+            loadAnimationAssets()
+        })
+    </script>
+</body>
+</html>
