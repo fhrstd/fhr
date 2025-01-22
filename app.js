@@ -32,21 +32,21 @@ async function fetchAnimations() {
     // Append each <img> tag to the <a-assets> tag
     assetsContainer.appendChild(imgTag);
   // Now dynamically set the material of the box using the loaded asset
-      const gif = document.querySelector('#gif');
+      const gif = document.querySelector('#gif1');
       gif.setAttribute('material', `shader:gif;src: #${item.name}`);
   });
   
-  background.forEach(item => {
-    const imgTag = document.createElement('img');
-    imgTag.setAttribute('id', item.name);   // Set 'id' to the animation's name
-    imgTag.setAttribute('src', item.gif_url);  // Set 'src' to the gif_url
+  //background.forEach(item => {
+   // const imgTag = document.createElement('img');
+    //imgTag.setAttribute('id', item.name);   // Set 'id' to the animation's name
+    //imgTag.setAttribute('src', item.gif_url);  // Set 'src' to the gif_url
 
     // Append each <img> tag to the <a-assets> tag
-    assetsContainer.appendChild(imgTag);
+    //assetsContainer.appendChild(imgTag);
   // Now dynamically set the material of the box using the loaded asset
-      const bg = document.querySelector('#bg');
-      bg.setAttribute(`src: #${item.name}`);
-  });
+     // const bg = document.querySelector('#bg1');
+     // bg.setAttribute(`src: #${item.name}`);
+  //});
   // Log the final HTML structure of <a-assets> to the console
   console.log(assetsContainer.innerHTML);
 }
