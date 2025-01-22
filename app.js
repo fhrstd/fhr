@@ -29,10 +29,10 @@ async function fetchAnimations() {
     imgTag.setAttribute('src', item.gif_url); // Use 'gif_url' for the source
 
     // Append the <img> tag to the <a-assets> tag
-    aAssetsTag.appendChild(imgTag);
+    //aAssetsTag.appendChild(imgTag);
 
-    // Append the <a-assets> tag to the container
-    assetsContainer.appendChild(aAssetsTag);
+    // Append the <img> tag to the container
+    assetsContainer.appendChild(imgTag);
   });
 }
 
