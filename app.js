@@ -30,7 +30,7 @@ async function fetchAnimations() {
     assetsContainer.appendChild(imgTag);
   // Now dynamically set the material of the box using the loaded asset
       const box = document.querySelector('#box1');
-      box.setAttribute('material', `shader:gif;transparent:true;src: #${item.name}`);
+      box.setAttribute('material', `shader:gif;src: #${item.name}`);
   });
   // Log the final HTML structure of <a-assets> to the console
   console.log(assetsContainer.innerHTML);
