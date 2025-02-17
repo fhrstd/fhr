@@ -23,12 +23,16 @@ async function fetchAnimations() {
   // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
   animations.forEach(item => {
     const imgTag = document.createElement('img');
+    imgTag.setAttribute('target', item.target_id);
     imgTag.setAttribute('id', item.name);   // Set 'id' to the animation's name
     imgTag.setAttribute('src', item.gif_url);  // Set 'src' to the gif_url
 
     // Append each <img> tag to the <a-assets> tag
     assetsContainer.appendChild(imgTag);
-  // Now dynamically set the material of the box using the loaded asset
+    // Now dynamically set the material of the box using the loaded asset
+      const box2 = document.querySelector('#box2');
+      box2.setAttribute('mindar-image-target', `targetIndex: #${item.target_id}`);
+    // Now dynamically set the material of the box using the loaded asset
       const box = document.querySelector('#box1');
       box.setAttribute('material', `shader:gif;src: #${item.name}`);
   });
