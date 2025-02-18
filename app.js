@@ -29,8 +29,28 @@ async function fetchAnimations() {
   });
   
 const entityContainer = document.querySelector('#entity-container');
+animations.forEach((elm, index) => {  
+  // Create the target entity
+  const target = document.createElement('a-entity');
 
-animations.forEach(elm => {  
+  // Create nested GIF entity inside target
+  target.innerHTML = `
+    <a-entity mindar-image-target="targetIndex: ${index}">
+      <a-entity 
+        material="shader: gif; src: #${elm.name}"
+        geometry="primitive: plane; width: 1; height: 1"
+        position="0 0 0"
+      ></a-entity>
+    </a-entity>
+  `;
+  
+  // Append the target to the container
+  entityContainer.appendChild(target);
+});
+
+console.log(assetsContainer.innerHTML);
+
+  /*animations.forEach(elm => {  
   // Create the target entity
     const target = document.createElement('a-entity');
     //target.setAttribute('mindar-image-target', `targetIndex`, elm.target_id);  // Fixed attribute syntax
@@ -52,7 +72,7 @@ animations.forEach(elm => {
 });
   
   console.log(assetsContainer.innerHTML);
-}
+}*/
 
 // Call the function to load the data and update the DOM
 fetchAnimations();
