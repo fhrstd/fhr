@@ -37,7 +37,7 @@ animations.forEach((elm, index) => {
       <a-entity mindar-image-target="targetIndex: ${index}">
       <a-entity 
             material="shader:gif; src:#${elm.name}"
-            geometry="primitive:plane; width:1; height:1"
+            geometry="primitive:plane; width:1; height:1.4"
             position="0 0 0"
        ></a-entity>
        </a-entity>
