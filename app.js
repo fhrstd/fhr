@@ -32,7 +32,7 @@ const entityContainer = document.querySelector('#entity-container');
 
 animations.forEach(elm => {  
     var tindex = 0;
-    var tt = document.getElementById("myTable").rows.length; 
+    var tt = document.getElementById('animations').rows.length; 
         for (var i = 0; i < tt; i++) {
         target.innerHTML = `
         <a-entity mindar-image-target="targetIndex: #${tindex++}">
