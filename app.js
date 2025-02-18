@@ -28,33 +28,26 @@ async function fetchAnimations() {
     assetsContainer.appendChild(assetItem);
   });
   
-  cconst entityContainer = document.querySelector('#entity-container');
+  const entityContainer = document.querySelector('#entity-container');
 
-animations.forEach(elm => {  
-    console.log('Current animation:', elm); // Debug line to see what data we have
-    
-    if (!elm.name || !elm.target_id) {
-        console.error('Missing name or target_id for animation:', elm);
-        return;
-    }
-
+    animations.forEach(elm => {  
     // Create outer entity with mindar-image-target
     const targetEntity = document.createElement('a-entity');
-    targetEntity.setAttribute('mindar-image-target', `targetIndex: ${elm.target_id}`);
+    targetEntity.setAttribute('mindar-image-target', 'targetIndex', elm.target_id);
     
     // Create inner entity with the GIF
     const gifEntity = document.createElement('a-entity');
     gifEntity.setAttribute('material', `shader: gif; src: #${elm.name}`);
-    gifEntity.setAttribute('geometry', 'primitive: plane; width: 1; height: 1');
-    gifEntity.setAttribute('position', '0 -0.25 0');
-    gifEntity.setAttribute('rotation', '0 0 0');
-    gifEntity.setAttribute('scale', '0.05 0.05 0.05');
+    gifEntity.setAttribute('geometry', `primitive: plane; width: 1; height: 1`);
+    gifEntity.setAttribute('position', `0 -0.25 0`);
+    gifEntity.setAttribute('rotation', `0 0 0`);
+    gifEntity.setAttribute('scale', `0.05 0.05 0.05`);
     
     // Nest gif entity inside target entity
     targetEntity.appendChild(gifEntity);
     
     // Add to container
-    entityContainer.appendChild(target);
+    entityContainer.appendChild(targetEntity);
 });
   
   console.log(assetsContainer.innerHTML);
@@ -62,4 +55,3 @@ animations.forEach(elm => {
 
 // Call the function to load the data and update the DOM
 fetchAnimations();
-
