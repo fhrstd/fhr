@@ -28,26 +28,24 @@ async function fetchAnimations() {
     assetsContainer.appendChild(assetItem);
   });
   
-  const entityContainer = document.querySelector('#entity-container');
+const entityContainer = document.querySelector('#entity-container');
 
-    animations.forEach(elm => {  
-    // Create outer entity with mindar-image-target
-    const targetEntity = document.createElement('a-entity');
-    targetEntity.setAttribute('mindar-image-target', 'targetIndex', elm.target_id);
+animations.forEach(elm => {  
+    // Create the target entity
+    const target = document.createElement('a-entity');
+    target.setAttribute('mindar-image-target', `targetIndex`, elm.target_id);  // Fixed attribute syntax
     
-    // Create inner entity with the GIF
-    const gifEntity = document.createElement('a-entity');
-    gifEntity.setAttribute('material', `shader: gif; src: #${elm.name}`);
-    gifEntity.setAttribute('geometry', `primitive: plane; width: 1; height: 1`);
-    gifEntity.setAttribute('position', `0 -0.25 0`);
-    gifEntity.setAttribute('rotation', `0 0 0`);
-    gifEntity.setAttribute('scale', `0.05 0.05 0.05`);
+    // Create nested GIF entity inside target
+    target.innerHTML = `
+        <a-entity 
+            material="shader: gif; src: #${elm.name}"
+            geometry="primitive: plane; width: 1; height: 1"
+            position="0 0 0"
+        ></a-entity>
+    `;
     
-    // Nest gif entity inside target entity
-    targetEntity.appendChild(gifEntity);
-    
-    // Add to container
-    entityContainer.appendChild(targetEntity);
+    // Append the target to the container
+    entityContainer.appendChild(target);
 });
   
   console.log(assetsContainer.innerHTML);
