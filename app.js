@@ -17,16 +17,6 @@ async function fetchAnimations() {
     return;
   }
 
- 
-  // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
-  //animations.forEach(item => {
-    //const imgTag = document.createElement('img');
-    //imgTag.setAttribute('id', item.name);   // Set 'id' to the animation's name
-    //imgTag.setAttribute('src', item.gif_url);  // Set 'src' to the gif_url
-
-    // Append each <img> tag to the <a-assets> tag
-    //assetsContainer.appendChild(imgTag);
-  //});
    // Find the <a-assets> container inside the <a-scene>
   const assetsContainer = document.querySelector('#assets-container');
    // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
@@ -37,14 +27,13 @@ async function fetchAnimations() {
     // Append each <img> tag to the <a-assets> tag
     assetsContainer.appendChild(assetItem);
   });
-
   
   const entityContainer = document.querySelector('#entity-container');
 
-animations.forEach(elm => {  
-    // Create the target entity
-    const target = document.createElement('a-entity');
-    target.setAttribute('mindar-image-target', `targetIndex: ${elm.target_id}`);
+    animations.forEach(elm => {  
+    // Create outer entity with mindar-image-target
+    const targetEntity = document.createElement('a-entity');
+    targetEntity.setAttribute('mindar-image-target', 'targetIndex', elm.target_id);
     
     // Create nested GIF entity inside target
     target.innerHTML = `
@@ -55,8 +44,11 @@ animations.forEach(elm => {
         ></a-entity>
     `;
     
-    // Append the target to the container
-    entityContainer.appendChild(target);
+    // Nest gif entity inside target entity
+    targetEntity.appendChild(gifEntity);
+    
+    // Add to container
+    entityContainer.appendChild(targetEntity);
 });
   
   console.log(assetsContainer.innerHTML);
