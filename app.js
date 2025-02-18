@@ -30,7 +30,7 @@ async function fetchAnimations() {
 const entityContainer = document.querySelector('#entity-container');
 animations.forEach((elm, index) => {  
   // Create the target entity
-    const target = document.createElement('p');
+    const target = document.createElement('a-entity');
     //target.setAttribute('mindar-image-target', `targetIndex`, elm.target_id);  // Fixed attribute syntax
     // Create nested GIF entity inside target
     target.innerHTML = `
