@@ -33,7 +33,7 @@ animations.forEach((elm, index) => {
     const target = document.createElement('p');
     //target.setAttribute('mindar-image-target', `targetIndex`, elm.target_id);  // Fixed attribute syntax
     // Create nested GIF entity inside target
-    document.getElementById("target").innerHTML = `
+    target.innerHTML = `
       <a-entity mindar-image-target="targetIndex: ${index}">
       <a-entity 
             material="shader: gif; src: #${elm.name}"
