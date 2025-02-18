@@ -58,7 +58,7 @@ animations.forEach(elm => {
    // `;
     
     // Append the target to the container
-   // entityContainer.appendChild(target);
+   entityContainer.appendChild(target);
 });
   
   console.log(assetsContainer.innerHTML);
