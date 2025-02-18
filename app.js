@@ -40,20 +40,25 @@ async function fetchAnimations() {
 
   
   const entityContainer = document.querySelector('#entity-container');
-  animations.forEach(elm => {  
-    entityContainer.setAttribute('mindar-image-target', `targetIndex: ${elm.target_id}`);   // Set 'id' to the animation's name
+
+animations.forEach(elm => {  
+    // Create the target entity
     const target = document.createElement('a-entity');
-    target.setAttribute('material', `shader:gif;src: #${elm.name}`);
-    // Append each <img> tag to the <a-assets> tag
+    target.setAttribute('mindar-image-target', `targetIndex: ${elm.target_id}`);
+    
+    // Create nested GIF entity inside target
+    target.innerHTML = `
+        <a-entity 
+            material="shader: gif; src: #${elm.name}"
+            geometry="primitive: plane; width: 1; height: 1"
+            position="0 0 0"
+        ></a-entity>
+    `;
+    
+    // Append the target to the container
     entityContainer.appendChild(target);
-  });
-  // Now dynamically set the material of the box using the loaded asset
-     //const target = document.querySelector('#target');
-     //target.setAttribute('mindar-image-target', `targetIndex: #${item.target_id}`);
-    // Now dynamically set the material of the box using the loaded asset
-     //const box = document.querySelector('#box');
-     //box.setAttribute('material', `shader:gif;src: #${item.name}`);
-  // Log the final HTML structure of <a-assets> to the console
+});
+  
   console.log(assetsContainer.innerHTML);
 }
 
