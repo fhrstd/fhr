@@ -19,22 +19,38 @@ async function fetchAnimations() {
 
   // Find the <a-assets> container inside the <a-scene>
   const assetsContainer = document.querySelector('#assets-container');
-
   // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
-  animations.forEach(item => {
-    const imgTag = document.createElement('img');
-    imgTag.setAttribute('id', item.name);   // Set 'id' to the animation's name
-    imgTag.setAttribute('src', item.gif_url);  // Set 'src' to the gif_url
+  //animations.forEach(item => {
+    //const imgTag = document.createElement('img');
+    //imgTag.setAttribute('id', item.name);   // Set 'id' to the animation's name
+    //imgTag.setAttribute('src', item.gif_url);  // Set 'src' to the gif_url
 
     // Append each <img> tag to the <a-assets> tag
-    assetsContainer.appendChild(imgTag);
-    // Now dynamically set the material of the box using the loaded asset
-      const target = document.querySelector('#target');
-      target.setAttribute('mindar-image-target', `targetIndex: #${item.target_id}`);
-    // Now dynamically set the material of the box using the loaded asset
-      const box = document.querySelector('#box');
-      box.setAttribute('material', `shader:gif;src: #${item.name}`);
+    //assetsContainer.appendChild(imgTag);
+  //});
+   // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
+  animations.forEach(item => {
+    const assetItem = document.createElement('a-asset-item');
+    assetItem.setAttribute('id', item.name);   // Set 'id' to the animation's name
+    assetItem.setAttribute('src', `${item.gif_url} </a-asset-item>`);  // Set 'src' to the gif_url
+
+    // Append each <img> tag to the <a-assets> tag
+    assetsContainer.appendChild(assetItem);
   });
+  const entityContainer = document.querySelector('#entity-container');
+  animations.forEach(item => {  
+    entityContainer.setAttribute('mindar-image-target', `targetIndex: ${item.target_id}`);   // Set 'id' to the animation's name
+    const target = document.createElement('a-entity');
+    target.setAttribute('material', `shader:gif;src: #${item.name}`);
+    // Append each <img> tag to the <a-assets> tag
+    entityContainer.appendChild(target);
+  });
+  // Now dynamically set the material of the box using the loaded asset
+     //const target = document.querySelector('#target');
+     //target.setAttribute('mindar-image-target', `targetIndex: #${item.target_id}`);
+    // Now dynamically set the material of the box using the loaded asset
+     //const box = document.querySelector('#box');
+     //box.setAttribute('material', `shader:gif;src: #${item.name}`);
   // Log the final HTML structure of <a-assets> to the console
   console.log(assetsContainer.innerHTML);
 }
