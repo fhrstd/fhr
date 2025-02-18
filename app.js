@@ -44,11 +44,8 @@ async function fetchAnimations() {
         ></a-entity>
     `;
     
-    // Nest gif entity inside target entity
-    targetEntity.appendChild(gifEntity);
-    
-    // Add to container
-    entityContainer.appendChild(targetEntity);
+    // Append the target to the container
+    entityContainer.appendChild(target);
 });
   
   console.log(assetsContainer.innerHTML);
