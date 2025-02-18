@@ -28,12 +28,19 @@ async function fetchAnimations() {
     assetsContainer.appendChild(assetItem);
   });
   
-  const entityContainer = document.querySelector('#entity-container');
+  cconst entityContainer = document.querySelector('#entity-container');
 
-    animations.forEach(elm => {  
+animations.forEach(elm => {  
+    console.log('Current animation:', elm); // Debug line to see what data we have
+    
+    if (!elm.name || !elm.target_id) {
+        console.error('Missing name or target_id for animation:', elm);
+        return;
+    }
+
     // Create outer entity with mindar-image-target
     const targetEntity = document.createElement('a-entity');
-    targetEntity.setAttribute('mindar-image-target', 'targetIndex', elm.target_id);
+    targetEntity.setAttribute('mindar-image-target', `targetIndex: ${elm.target_id}`);
     
     // Create inner entity with the GIF
     const gifEntity = document.createElement('a-entity');
@@ -47,7 +54,7 @@ async function fetchAnimations() {
     targetEntity.appendChild(gifEntity);
     
     // Add to container
-    entityContainer.appendChild(targetEntity);
+    entityContainer.appendChild(target);
 });
   
   console.log(assetsContainer.innerHTML);
