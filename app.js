@@ -17,8 +17,7 @@ async function fetchAnimations() {
     return;
   }
 
-  // Find the <a-assets> container inside the <a-scene>
-  const assetsContainer = document.querySelector('#assets-container');
+ 
   // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
   //animations.forEach(item => {
     //const imgTag = document.createElement('img');
@@ -28,20 +27,23 @@ async function fetchAnimations() {
     // Append each <img> tag to the <a-assets> tag
     //assetsContainer.appendChild(imgTag);
   //});
+   // Find the <a-assets> container inside the <a-scene>
+  const assetsContainer = document.querySelector('#assets-container');
    // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
   animations.forEach(item => {
     const assetItem = document.createElement('a-asset-item');
     assetItem.setAttribute('id', item.name);   // Set 'id' to the animation's name
     assetItem.setAttribute('src', `${item.gif_url} </a-asset-item>`);  // Set 'src' to the gif_url
-
     // Append each <img> tag to the <a-assets> tag
     assetsContainer.appendChild(assetItem);
   });
+
+  
   const entityContainer = document.querySelector('#entity-container');
-  animations.forEach(item => {  
-    entityContainer.setAttribute('mindar-image-target', `targetIndex: ${item.target_id}`);   // Set 'id' to the animation's name
+  animations.forEach(elm => {  
+    entityContainer.setAttribute('mindar-image-target', `targetIndex: ${elm.target_id}`);   // Set 'id' to the animation's name
     const target = document.createElement('a-entity');
-    target.setAttribute('material', `shader:gif;src: #${item.name}`);
+    target.setAttribute('material', `shader:gif;src: #${elm.name}`);
     // Append each <img> tag to the <a-assets> tag
     entityContainer.appendChild(target);
   });
