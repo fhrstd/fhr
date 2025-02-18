@@ -20,7 +20,7 @@ async function fetchAnimations() {
   const assetsContainer = document.querySelector('#assets-container');
    // Loop through the retrieved data and create <img> tags inside the <a-assets> tag
   animations.forEach(item => {
-    const assetItem = document.createElement('a-asset-item');
+    const assetItem = document.createElement('img');
     assetItem.setAttribute('id', item.name);   // Set 'id' to the animation's name
     assetItem.setAttribute('src', `${item.gif_url}`);  // Set 'src' to the gif_url
     // Append each <img> tag to the <a-assets> tag
