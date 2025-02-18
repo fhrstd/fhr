@@ -22,7 +22,7 @@ async function fetchAnimations() {
   animations.forEach(item => {
     const assetItem = document.createElement('a-asset-item');
     assetItem.setAttribute('id', item.name);   // Set 'id' to the animation's name
-    assetItem.setAttribute('src', `${item.gif_url} </a-asset-item>`);  // Set 'src' to the gif_url
+    assetItem.setAttribute('src', `${item.gif_url}`);  // Set 'src' to the gif_url
     // Append each <img> tag to the <a-assets> tag
     assetsContainer.appendChild(assetItem);
   });
@@ -30,7 +30,7 @@ async function fetchAnimations() {
 const entityContainer = document.querySelector('#entity-container');
 animations.forEach((elm, index) => {  
   // Create the target entity
-    //const target = document.createElement('a-entity');
+    const target = document.createElement('p');
     //target.setAttribute('mindar-image-target', `targetIndex`, elm.target_id);  // Fixed attribute syntax
     // Create nested GIF entity inside target
     document.getElementById("target").innerHTML = `
@@ -44,7 +44,7 @@ animations.forEach((elm, index) => {
    `;
     
     // Append the target to the container
-   //entityContainer.appendChild(target);
+   entityContainer.appendChild(target);
 });
   
   console.log(assetsContainer.innerHTML);
