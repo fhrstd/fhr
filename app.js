@@ -33,22 +33,38 @@ async function fetchAnimations() {
     console.log(`Creating entity for ${elm.name} with target ID: ${elm.target_id}`); // Debugging
 
     const target = document.createElement('a-entity');
+    const entityId = `gif-${elm.name}`; // Unique ID for each GIF entity
 
     target.innerHTML = `
       <a-entity mindar-image-target="targetIndex: ${elm.target_id}">
         <a-entity 
+          id="${entityId}"
           material="shader: gif; src: #${elm.name}" 
           geometry="primitive: plane; width: 1; height: 1.4"
-          position="0 0 0"
+          position="0 0 0.01"  
         ></a-entity>
       </a-entity>
     `;
 
     entityContainer.appendChild(target);
+
+    // Reset GIF animation after a short delay
+    setTimeout(() => resetGif(entityId, `#${elm.name}`), 500);
   });
 
   console.log("Entities added:", entityContainer.innerHTML); // Debugging entities
 }
 
-fetchAnimations();
+// Function to reset GIF animation
+function resetGif(entityId, gifUrl) {
+  const gifEntity = document.querySelector(`#${entityId}`);
+  if (gifEntity) {
+    gifEntity.setAttribute("material", "shader: gif; src: ''"); // Clear src
+    setTimeout(() => {
+      gifEntity.setAttribute("material", `shader: gif; src: ${gifUrl}`);
+    }, 100); // Small delay before reloading
+  }
+}
 
+// Call the function to load the data and update the DOM
+fetchAnimations();
