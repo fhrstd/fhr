@@ -40,7 +40,7 @@ async function fetchAnimations() {
         <a-entity 
           id="${entityId}"
           material="shader: gif; src: #${elm.name}" 
-          geometry="primitive: plane; width: 1; height: 1.4"
+          geometry="primitive: plane; width: 1; height: 1"
           position="0 0 0.01"
         ></a-entity>
       </a-entity>
@@ -48,16 +48,31 @@ async function fetchAnimations() {
 
     entityContainer.appendChild(target);
 
-    // Add event listener to reset GIF when the target is detected
+    // 🔹 Add event listener to reset GIF when the target is detected
     target.addEventListener('targetFound', () => {
       resetGif(entityId, `#${elm.name}`);
     });
+
+    // 🔹 Add animation loop to refresh the material every frame
+    AFRAME.registerComponent('gif-refresh', {
+      tick: function () {
+        const gifEntity = document.querySelector(`#${entityId}`);
+        if (gifEntity) {
+          const currentSrc = gifEntity.getAttribute('material').src;
+          gifEntity.setAttribute('material', `shader: gif; src: ''`); // Clear src
+          gifEntity.setAttribute('material', `shader: gif; src: ${currentSrc}`); // Reload src
+        }
+      }
+    });
+
+    // Attach gif-refresh component
+    target.setAttribute('gif-refresh', '');
   });
 
   console.log("Entities added:", entityContainer.innerHTML); // Debugging entities
 }
 
-// Function to reset GIF only when needed
+// 🔹 Function to reset GIF only when needed
 function resetGif(entityId, gifUrl) {
   const gifEntity = document.querySelector(`#${entityId}`);
   if (gifEntity) {
@@ -67,6 +82,10 @@ function resetGif(entityId, gifUrl) {
     }, 100); // Small delay before reloading
   }
 }
+
+// Call the function to load the data and update the DOM
+fetchAnimations();
+
 
 // Call the function to load the data and update the DOM
 fetchAnimations();
