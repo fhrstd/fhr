@@ -41,21 +41,23 @@ async function fetchAnimations() {
           id="${entityId}"
           material="shader: gif; src: #${elm.name}" 
           geometry="primitive: plane; width: 1; height: 1.4"
-          position="0 0 0.01"  
+          position="0 0 0.01"
         ></a-entity>
       </a-entity>
     `;
 
     entityContainer.appendChild(target);
 
-    // Reset GIF animation after a short delay
-    setTimeout(() => resetGif(entityId, `#${elm.name}`), 500);
+    // Add event listener to reset GIF when the target is detected
+    target.addEventListener('targetFound', () => {
+      resetGif(entityId, `#${elm.name}`);
+    });
   });
 
   console.log("Entities added:", entityContainer.innerHTML); // Debugging entities
 }
 
-// Function to reset GIF animation
+// Function to reset GIF only when needed
 function resetGif(entityId, gifUrl) {
   const gifEntity = document.querySelector(`#${entityId}`);
   if (gifEntity) {
