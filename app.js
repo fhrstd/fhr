@@ -33,59 +33,22 @@ async function fetchAnimations() {
     console.log(`Creating entity for ${elm.name} with target ID: ${elm.target_id}`); // Debugging
 
     const target = document.createElement('a-entity');
-    const entityId = `gif-${elm.name}`; // Unique ID for each GIF entity
 
     target.innerHTML = `
       <a-entity mindar-image-target="targetIndex: ${elm.target_id}">
         <a-entity 
-          id="${entityId}"
-          material="shader: gif; src: #${elm.name}" 
+          material="shader: gif; src: #${elm.name}; transparent: true" 
           geometry="primitive: plane; width: 1; height: 1.4"
-          position="0 0 0.01"
+          position="0 0 0"
         ></a-entity>
       </a-entity>
     `;
 
     entityContainer.appendChild(target);
-
-    // 🔹 Add event listener to reset GIF when the target is detected
-    target.addEventListener('targetFound', () => {
-      resetGif(entityId, `#${elm.name}`);
-    });
-
-    // 🔹 Add animation loop to refresh the material every frame
-    AFRAME.registerComponent('gif-refresh', {
-      tick: function () {
-        const gifEntity = document.querySelector(`#${entityId}`);
-        if (gifEntity) {
-          const currentSrc = gifEntity.getAttribute('material').src;
-          gifEntity.setAttribute('material', `shader: gif; src: ''`); // Clear src
-          gifEntity.setAttribute('material', `shader: gif; src: ${currentSrc}`); // Reload src
-        }
-      }
-    });
-
-    // Attach gif-refresh component
-    target.setAttribute('gif-refresh', '');
   });
 
   console.log("Entities added:", entityContainer.innerHTML); // Debugging entities
 }
 
-// 🔹 Function to reset GIF only when needed
-function resetGif(entityId, gifUrl) {
-  const gifEntity = document.querySelector(`#${entityId}`);
-  if (gifEntity) {
-    gifEntity.setAttribute("material", "shader: gif; src: ''"); // Clear src
-    setTimeout(() => {
-      gifEntity.setAttribute("material", `shader: gif; src: ${gifUrl}`);
-    }, 6.66); // Small delay before reloading
-  }
-}
-
-// Call the function to load the data and update the DOM
 fetchAnimations();
 
-
-// Call the function to load the data and update the DOM
-fetchAnimations();
