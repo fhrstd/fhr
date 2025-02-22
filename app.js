@@ -40,7 +40,7 @@ async function fetchAnimations() {
         <a-entity 
           id="${entityId}"
           material="shader: gif; src: #${elm.name}" 
-          geometry="primitive: plane; width: 1; height: 1"
+          geometry="primitive: plane; width: 1; height: 1.4"
           position="0 0 0.01"
         ></a-entity>
       </a-entity>
@@ -79,7 +79,7 @@ function resetGif(entityId, gifUrl) {
     gifEntity.setAttribute("material", "shader: gif; src: ''"); // Clear src
     setTimeout(() => {
       gifEntity.setAttribute("material", `shader: gif; src: ${gifUrl}`);
-    }, 100); // Small delay before reloading
+    }, 6.66); // Small delay before reloading
   }
 }
 
