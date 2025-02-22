@@ -38,7 +38,7 @@ async function fetchAnimations() {
       <a-entity mindar-image-target="targetIndex: ${elm.target_id}">
         <a-entity 
           material="shader: gif; src: #${elm.name}" 
-          geometry="primitive: plane; width: 1; height: 1"
+          geometry="primitive: plane; width: 1; height: 1.4"
           position="0 0 0"
         ></a-entity>
       </a-entity>
